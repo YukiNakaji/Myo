@@ -8,6 +8,10 @@ package com.thalmic.android.sample.helloworld;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,13 +26,45 @@ import com.thalmic.myo.Hub;
 import com.thalmic.myo.Myo;
 import com.thalmic.myo.Pose;
 import com.thalmic.myo.Quaternion;
+import com.thalmic.myo.Vector3;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
-public class HelloWorldActivity extends Activity {
+public class HelloWorldActivity extends Activity implements SensorEventListener{
 
     private TextView mLockStateView;
     private TextView mTextView;
+
+    //myo加速度表示に使うテキストビュー
+    private TextView mxAccelerometerTextView;
+    private TextView myAccelerometerTextView;
+    private TextView mzAccelerometerTextView;
+
+    //myoジャイロセンサデータ表示に使うテキストビュー
+    private TextView mxGyroTextView;
+    private TextView myGyroTextView;
+    private TextView mzGyroTextView;
+
+
+    //センサの作成
+    private SensorManager manager;
+    private Sensor accelSensor;
+    private Sensor gyroSensor;
+
+    //Androidデータ格納配列
+    private float[] accelerometerValues = new float[3];
+    private float[] gyroValues = new float[3];
+
+    //Android加速度データ表示に使うテキストビュー
+    private TextView axAccelerometerTextView;
+    private TextView ayAccelerometerTextView;
+    private TextView azAccelerometerTextView;
+
+    //Androidジャイロデータ表示に使うテキストビュー
+    private TextView axGyroTextView;
+    private TextView ayGyroTextView;
+    private TextView azGyroTextView;
+
 
     // Classes that inherit from AbstractDeviceListener can be used to receive events from Myo devices.
     // If you do not override an event, the default behavior is to do nothing.
@@ -98,6 +134,28 @@ public class HelloWorldActivity extends Activity {
             mTextView.setRotationY(yaw);
         }
 
+        //myo加速度データの取得
+        @Override
+        public void onAccelerometerData(Myo myo, long timestamp, Vector3 accel) {
+            super.onAccelerometerData(myo, timestamp, accel);
+            //Log.d(TAG, "onAccelerometerData: "+accel.x()+"\t"+accel.y()+"\t"+accel.z());
+
+            mxAccelerometerTextView.setText(String.valueOf(accel.x()));
+            myAccelerometerTextView.setText(String.valueOf(accel.y()));
+            mzAccelerometerTextView.setText(String.valueOf(accel.z()));
+        }
+
+        //myoジャイロセンサデータの取得
+        @Override
+        public void onGyroscopeData(Myo myo, long timestamp, Vector3 gyro) {
+            super.onGyroscopeData(myo, timestamp, gyro);
+
+            mxGyroTextView.setText(String.valueOf(gyro.x()));
+            myGyroTextView.setText(String.valueOf(gyro.y()));
+            mzGyroTextView.setText(String.valueOf(gyro.z()));
+        }
+
+
         // onPose() is called whenever a Myo provides a new pose.
         @Override
         public void onPose(Myo myo, long timestamp, Pose pose) {
@@ -158,6 +216,28 @@ public class HelloWorldActivity extends Activity {
         mLockStateView = (TextView) findViewById(R.id.lock_state);
         mTextView = (TextView) findViewById(R.id.text);
 
+        mxAccelerometerTextView= (TextView) findViewById(R.id.mxAccelerometerValue);
+        myAccelerometerTextView= (TextView) findViewById(R.id.myAccelerometerValue);
+        mzAccelerometerTextView= (TextView) findViewById(R.id.mzAccelerometerValue);
+
+        mxGyroTextView= (TextView) findViewById(R.id.mxGyroValue);
+        myGyroTextView= (TextView) findViewById(R.id.myGyroValue);
+        mzGyroTextView= (TextView) findViewById(R.id.mzGyroValue);
+
+        axAccelerometerTextView= (TextView) findViewById(R.id.axAccelerometerValue);
+        ayAccelerometerTextView= (TextView) findViewById(R.id.ayAccelerometerValue);
+        azAccelerometerTextView= (TextView) findViewById(R.id.azAccelerometerValue);
+
+        axGyroTextView= (TextView) findViewById(R.id.axGyroValue);
+        ayGyroTextView= (TextView) findViewById(R.id.ayGyroValue);
+        azGyroTextView= (TextView) findViewById(R.id.azGyroValue);
+
+
+
+        manager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        accelSensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        gyroSensor = manager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+
         // First, we initialize the Hub singleton with an application identifier.
         Hub hub = Hub.getInstance();
         if (!hub.init(this, getPackageName())) {
@@ -205,5 +285,45 @@ public class HelloWorldActivity extends Activity {
         // Launch the ScanActivity to scan for Myos to connect to.
         Intent intent = new Intent(this, ScanActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        {
+            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                accelerometerValues = event.values.clone();
+            }
+            else if(event.sensor.getType() == Sensor.TYPE_GYROSCOPE){
+                gyroValues = event.values.clone();
+            }
+
+            axAccelerometerTextView.setText(String.valueOf(accelerometerValues[0]));
+            ayAccelerometerTextView.setText(String.valueOf(accelerometerValues[1]));
+            azAccelerometerTextView.setText(String.valueOf(accelerometerValues[2]));
+
+            axGyroTextView.setText(String.valueOf(gyroValues[0]));
+            ayGyroTextView.setText(String.valueOf(gyroValues[1]));
+            azGyroTextView.setText(String.valueOf(gyroValues[2]));
+
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        manager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_GAME);
+        manager.registerListener(this, gyroSensor, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        manager.unregisterListener(this);
     }
 }

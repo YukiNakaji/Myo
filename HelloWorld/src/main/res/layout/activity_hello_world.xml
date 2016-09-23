@@ -7,16 +7,6 @@
     tools:ignore="MergeRootFrame">
 
     <TextView
-        android:id="@+id/lock_state"
-        android:text="@string/locked"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="top|center_horizontal"
-        tools:ignore="SpUsage"/>
-
-    <TextView
         android:id="@+id/text"
         android:text="@string/hello_world"
         android:textSize="50dp"
@@ -24,5 +14,191 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         tools:ignore="SpUsage"/>
+
+    <GridLayout
+        android:layout_width="294dp"
+        android:layout_height="124dp"
+        android:layout_gravity="left|top">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Myo"
+            android:id="@+id/textView"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="加速度"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/mxAccelerometerValue"
+            android:layout_row="2"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/mxGyroValue"
+            android:layout_row="2"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/myAccelerometerValue"
+            android:layout_row="3"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/myGyroValue"
+            android:layout_row="3"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/mzAccelerometerValue"
+            android:layout_row="4"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="角速度"
+            android:layout_row="1"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/mzGyroValue"
+            android:layout_row="4"
+            android:layout_column="2" />
+
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="294dp"
+        android:layout_height="124dp"
+        android:layout_gravity="left|bottom" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Android"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="加速度"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:id="@+id/axAccelerometerValue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/axGyroValue"
+            android:layout_row="2"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/ayAccelerometerValue"
+            android:layout_row="3"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/ayGyroValue"
+            android:layout_row="3"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/azAccelerometerValue"
+            android:layout_row="4"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="角速度"
+            android:layout_row="1"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/azGyroValue"
+            android:layout_row="4"
+            android:layout_column="2" />
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="128dp"
+        android:layout_height="146dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="113dp"
+            android:layout_height="111dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="locked"
+            android:id="@+id/lock_state"
+            android:layout_gravity="right|center_vertical"
+            android:layout_row="7"
+            android:layout_column="0" />
+    </GridLayout>
 
 </FrameLayout>
