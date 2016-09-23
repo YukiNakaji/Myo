@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\res\\merged\\debug\\drawable\\myosdk__firmware_incompatible_dot.xml",
+        "source": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\drawable\\myosdk__firmware_incompatible_dot.xml"
+    },
+    {
+        "merged": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\res\\merged\\debug\\drawable\\myosdk__connected_dot.xml",
+        "source": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\drawable\\myosdk__connected_dot.xml"
+    }
+]

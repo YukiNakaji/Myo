@@ -1,0 +1,351 @@
+[
+    {
+        "outputFile": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 55,
+                    "endOffset": 106
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 196,
+                        "endColumn": 55,
+                        "endOffset": 247
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 111,
+                    "endColumn": 52,
+                    "endOffset": 159
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 252,
+                        "endColumn": 52,
+                        "endOffset": 300
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 164,
+                    "endColumn": 57,
+                    "endOffset": 217
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 305,
+                        "endColumn": 57,
+                        "endOffset": 358
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 222,
+                    "endColumn": 54,
+                    "endOffset": 272
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 363,
+                        "endColumn": 54,
+                        "endOffset": 413
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 277,
+                    "endColumn": 65,
+                    "endOffset": 338
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 559,
+                        "endColumn": 65,
+                        "endOffset": 620
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 343,
+                    "endColumn": 63,
+                    "endOffset": 402
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 625,
+                        "endColumn": 63,
+                        "endOffset": 684
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 407,
+                    "endColumn": 65,
+                    "endOffset": 468
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 689,
+                        "endColumn": 65,
+                        "endOffset": 750
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 473,
+                    "endColumn": 64,
+                    "endOffset": 533
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 755,
+                        "endColumn": 64,
+                        "endOffset": 815
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 538,
+                    "endColumn": 50,
+                    "endOffset": 584
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 50,
+                        "endOffset": 102
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 589,
+                    "endColumn": 52,
+                    "endOffset": 637
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 962,
+                        "endColumn": 52,
+                        "endOffset": 1010
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 642,
+                    "endColumn": 62,
+                    "endOffset": 700
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1015,
+                        "endColumn": 62,
+                        "endOffset": 1073
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 705,
+                    "endColumn": 82,
+                    "endOffset": 783
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 1078,
+                        "endColumn": 82,
+                        "endOffset": 1156
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 788,
+                    "endColumn": 71,
+                    "endOffset": 855
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1161,
+                        "endColumn": 71,
+                        "endOffset": 1228
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 860,
+                    "endColumn": 68,
+                    "endOffset": 924
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1233,
+                        "endColumn": 68,
+                        "endOffset": 1297
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 929,
+                    "endColumn": 59,
+                    "endOffset": 984
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1302,
+                        "endColumn": 59,
+                        "endOffset": 1357
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 989,
+                    "endColumn": 68,
+                    "endOffset": 1053
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 107,
+                        "endColumn": 68,
+                        "endOffset": 171
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1058,
+                    "endLine": 27,
+                    "endColumn": 12,
+                    "endOffset": 1655
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 4,
+                        "startOffset": 1503,
+                        "endLine": 33,
+                        "endColumn": 12,
+                        "endOffset": 2100
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1660,
+                    "endColumn": 79,
+                    "endOffset": 1735
+                },
+                "from": {
+                    "file": "C:\\Users\\Yuki Nakajima\\Desktop\\myo-android-sdk-0.10.0\\samples\\MultipleMyos\\build\\intermediates\\exploded-aar\\com.thalmic\\myosdk\\0.10.0\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 34,
+                        "startColumn": 4,
+                        "startOffset": 2105,
+                        "endColumn": 79,
+                        "endOffset": 2180
+                    }
+                }
+            }
+        ]
+    }
+]
