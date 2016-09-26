@@ -13,9 +13,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,11 @@ import com.thalmic.myo.Quaternion;
 import com.thalmic.myo.Vector3;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class HelloWorldActivity extends Activity implements SensorEventListener{
 
@@ -64,6 +73,8 @@ public class HelloWorldActivity extends Activity implements SensorEventListener{
     private TextView axGyroTextView;
     private TextView ayGyroTextView;
     private TextView azGyroTextView;
+
+    public int button_flag = 0;
 
 
     // Classes that inherit from AbstractDeviceListener can be used to receive events from Myo devices.
@@ -232,11 +243,64 @@ public class HelloWorldActivity extends Activity implements SensorEventListener{
         ayGyroTextView= (TextView) findViewById(R.id.ayGyroValue);
         azGyroTextView= (TextView) findViewById(R.id.azGyroValue);
 
+        Button start_btn = (Button) findViewById(R.id.startbutton);
+        Button stop_btn = (Button) findViewById(R.id.stopbutton);
+
+        start_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button_flag = 1;
+                System.out.println(button_flag);
+
+            }
+        });
+
+        stop_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button_flag = 0;
+                System.out.println(button_flag);
+            }
+        });
+
+        System.out.println("aa");
+
+        try {
+            //出力先を作成する
+            FileWriter fw = new FileWriter(Environment.getExternalStorageDirectory().getPath()+"test3.csv", false);
+            PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
+
+            //内容を指定する
+            pw.print("あ");
+            pw.print(",");
+            pw.print("い");
+            pw.println();
+
+            pw.print("01");
+            pw.print(",");
+            pw.print("02");
+            pw.println();
+
+            //ファイルに書き出す
+            pw.close();
+
+            //終了メッセージを画面に出力する
+            System.out.println("出力が完了しました。");
+
+        } catch (IOException ex) {
+            //例外時処理
+            ex.printStackTrace();
+            System.out.println("bbb");
+        }
+
+
 
 
         manager = (SensorManager)getSystemService(SENSOR_SERVICE);
         accelSensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         gyroSensor = manager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+
+
 
         // First, we initialize the Hub singleton with an application identifier.
         Hub hub = Hub.getInstance();
