@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.thalmic\myosdk\0.10.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="d189db75174a41996c33bb243d2228aacf10fa53">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\classes-ccd9105ac13ec87ab8fb53009b72cf19c8e025b9.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.thalmic\myosdk\0.10.0\libs\native-libs.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="d24ac9790966ffbd1bd9d921a262572c94903027">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\native-libs-83d5840f0baf3987463ed7527d7481d8f67233d5.jar" />
+    </item>
+
+</items>

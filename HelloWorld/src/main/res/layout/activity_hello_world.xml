@@ -6,15 +6,6 @@
     tools:context="com.thalmic.android.sample.helloworld.HelloWorldActivity"
     tools:ignore="MergeRootFrame">
 
-    <TextView
-        android:id="@+id/text"
-        android:text="@string/hello_world"
-        android:textSize="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        tools:ignore="SpUsage"/>
-
     <GridLayout
         android:layout_width="294dp"
         android:layout_height="124dp"
@@ -102,9 +93,16 @@
     </GridLayout>
 
     <GridLayout
+        android:layout_width="128dp"
+        android:layout_height="146dp"
+        android:layout_gravity="center">
+
+    </GridLayout>
+
+    <GridLayout
         android:layout_width="294dp"
         android:layout_height="124dp"
-        android:layout_gravity="left|bottom" >
+        android:layout_gravity="left|center_vertical" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -185,20 +183,18 @@
             android:layout_column="2" />
     </GridLayout>
 
-    <GridLayout
-        android:layout_width="128dp"
-        android:layout_height="146dp"
-        android:layout_gravity="center">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STOP/SEND"
+        android:id="@+id/stopbutton"
+        android:layout_gravity="right|bottom" />
 
-        <TextView
-            android:layout_width="113dp"
-            android:layout_height="111dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="locked"
-            android:id="@+id/lock_state"
-            android:layout_gravity="right|center_vertical"
-            android:layout_row="7"
-            android:layout_column="0" />
-    </GridLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="START"
+        android:id="@+id/startbutton"
+        android:layout_gravity="center_horizontal|bottom" />
 
 </FrameLayout>
