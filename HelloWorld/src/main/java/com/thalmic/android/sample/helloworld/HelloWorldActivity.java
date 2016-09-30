@@ -6,6 +6,7 @@
 package com.thalmic.android.sample.helloworld;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -169,10 +170,10 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
             super.onGyroscopeData(myo, timestamp, gyro);
 
             //myo角速度の配列への格納
-            myoAccellist.add((float)timestamp);
-            myoAccellist.add((float)gyro.x());
-            myoAccellist.add((float)gyro.y());
-            myoAccellist.add((float)gyro.z());
+            myoGyrolist.add((float)timestamp);
+            myoGyrolist.add((float)gyro.x());
+            myoGyrolist.add((float)gyro.y());
+            myoGyrolist.add((float)gyro.z());
 
             //myo角速度をテキストへセット
             mxGyroTextView.setText(String.valueOf(gyro.x()));
@@ -239,7 +240,7 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
         setContentView(R.layout.activity_hello_world);
 
         //mLockStateView = (TextView) findViewById(R.id.lock_state);
-        //mTextView = (TextView) findViewById(R.id.text);
+        mTextView = (TextView) findViewById(R.id.text);
 
         mxAccelerometerTextView= (TextView) findViewById(R.id.mxAccelerometerValue);
         myAccelerometerTextView= (TextView) findViewById(R.id.myAccelerometerValue);
@@ -380,6 +381,7 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
                 androidGyrolist.clear();
                 myoAccellist.clear();
                 myoGyrolist.clear();
+                Toast.makeText(this,"計測を開始します",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.stopbutton:
                 Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -412,6 +414,7 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
 
                 try{
                     startActivity(intent);
+                    Toast.makeText(this,"計測を終了します",Toast.LENGTH_SHORT).show();
                 }catch(Exception e){
                     Toast.makeText(this,"対象のアプリがありません",Toast.LENGTH_SHORT).show();
             }

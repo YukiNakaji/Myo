@@ -197,4 +197,13 @@
         android:id="@+id/startbutton"
         android:layout_gravity="center_horizontal|bottom" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="132dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Myo"
+        android:id="@+id/text"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textSize="50dp" />
+
 </FrameLayout>
