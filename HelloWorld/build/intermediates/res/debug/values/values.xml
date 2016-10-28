@@ -12,7 +12,7 @@
     <dimen name="myosdk__fragment_scan_window_width">0dp</dimen>
     <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="app_name">Hello World</string>
+    <string name="app_name">Myo and Android Data</string>
     <string name="arm_left">Left Arm</string>
     <string name="arm_right">Right Arm</string>
     <string name="hello_world">Hello world!</string>

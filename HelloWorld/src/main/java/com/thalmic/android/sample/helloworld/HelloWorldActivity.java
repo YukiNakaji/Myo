@@ -5,10 +5,12 @@
 
 package com.thalmic.android.sample.helloworld;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -35,7 +37,7 @@ import com.thalmic.myo.scanner.ScanActivity;
 
 import java.util.ArrayList;
 
-public class HelloWorldActivity extends Activity implements SensorEventListener, View.OnClickListener{
+public class HelloWorldActivity extends Activity implements SensorEventListener, View.OnClickListener {
     private long startTime = 0;
 
     private TextView state;
@@ -43,17 +45,20 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
     private TextView mLockStateView;
     private TextView mTextView;
 
-    //myo加速度表示に使うテキストビュー/配列
-    private TextView mxAccelerometerTextView;
-    private TextView myAccelerometerTextView;
-    private TextView mzAccelerometerTextView;
+    //myo加速度に関する変数
+    private TextView[] mAccelerometerTextView = new TextView[3];
+    private boolean mFirst = true;
+    private float[] lowpass_m = new float[3];
+    private float[] m = new float[3];
+    private float[] m2 = new float[3];
+    private float M;
     ArrayList<Float> myoAccellist = new ArrayList<Float>();
 
 
-    //myoジャイロセンサデータ表示に使うテキストビュー/配列
-    private TextView mxGyroTextView;
-    private TextView myGyroTextView;
-    private TextView mzGyroTextView;
+    //myo角速度に関する変数
+    private TextView[] mGyroTextView = new TextView[3];
+    private boolean mgFirst = true;
+    private float[] mg = new float[3];
     ArrayList<Float> myoGyrolist = new ArrayList<Float>();
 
 
@@ -66,17 +71,20 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
     private float[] accelerometerValues = new float[3];
     private float[] gyroValues = new float[3];
 
-    //Android加速度データ表示に使うテキストビュー/配列
-    private TextView axAccelerometerTextView;
-    private TextView ayAccelerometerTextView;
-    private TextView azAccelerometerTextView;
+    //Android加速度に関する変数
+    private TextView[] aAccelerometerTextView = new TextView[3];
+    private boolean aFirst = true;
+    private float[] lowpass_a = new float[3];
+    private float[] a = new float[3];
+    private float[] a2 = new float[3];
+    private float A;
     ArrayList<Float> androidAccellist = new ArrayList<Float>();
 
 
-    //Androidジャイロデータ表示に使うテキストビュー/配列
-    private TextView axGyroTextView;
-    private TextView ayGyroTextView;
-    private TextView azGyroTextView;
+    //Android角速度に関する変数
+    private TextView[] aGyroTextView = new TextView[3];
+    private boolean agFirst = true;
+    private float[] ag = new float[3];
     ArrayList<Float> androidGyrolist = new ArrayList<Float>();
 
 
@@ -154,17 +162,41 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
             super.onAccelerometerData(myo, timestamp, accel);
             //Log.d(TAG, "onAccelerometerData: "+accel.x()+"\t"+accel.y()+"\t"+accel.z());
 
-            //myo加速度の配列への格納
-            myoAccellist.add((float) ((System.nanoTime()-startTime)*0.000001));
-            myoAccellist.add((float)accel.x());
-            myoAccellist.add((float)accel.y());
-            myoAccellist.add((float)accel.z());
+            if (mFirst) {
+                lowpass_m[0] = (float) accel.x();
+                lowpass_m[1] = (float) accel.y();
+                lowpass_m[2] = (float) accel.z();
 
+                mFirst = false;
+            } else {
+                //ローパスフィルタをかける
+                lowpass_m[0] = (float) (lowpass_m[0] * 0.9 + accel.x() * 0.1);
+                lowpass_m[1] = (float) (lowpass_m[1] * 0.9 + accel.y() * 0.1);
+                lowpass_m[2] = (float) (lowpass_m[2] * 0.9 + accel.z() * 0.1);
+
+                //ハイパスフィルタで重力除去
+                m[0] = (float) accel.x() - lowpass_m[0];
+                m[1] = (float) accel.y() - lowpass_m[1];
+                m[2] = (float) accel.z() - lowpass_m[2];
+            }
+
+            for (int i = 0; i < m.length; i++) {
+                m2[i] = m[i] * m[i];
+            }
+
+            M = (float) (Math.sqrt(m2[0] + m2[1] + m2[2]));
+
+            //myo加速度の配列への格納
+            myoAccellist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+            for (int i = 0; i < m.length; i++) {
+                myoAccellist.add(m[i]);
+            }
+            myoAccellist.add(M);
 
             //myo加速度をテキストへセット
-            mxAccelerometerTextView.setText(String.valueOf(accel.x()));
-            myAccelerometerTextView.setText(String.valueOf(accel.y()));
-            mzAccelerometerTextView.setText(String.valueOf(accel.z()));
+            for (int i = 0; i < m.length; i++) {
+                mAccelerometerTextView[i].setText(String.valueOf(m[i]));
+            }
         }
 
         //myoジャイロセンサデータの取得
@@ -172,16 +204,29 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
         public void onGyroscopeData(Myo myo, long timestamp, Vector3 gyro) {
             super.onGyroscopeData(myo, timestamp, gyro);
 
+            if (mgFirst) {
+                mg[0] = (float) gyro.x();
+                mg[1] = (float) gyro.y();
+                mg[2] = (float) gyro.z();
+
+                mgFirst = false;
+            } else {
+                //ローパスフィルタをかける
+                mg[0] = (float) ((mg[0] * 0.9 + gyro.x() * 0.1) * 0.01745);
+                mg[1] = (float) ((mg[1] * 0.9 + gyro.y() * 0.1) * 0.01745);
+                mg[2] = (float) ((mg[2] * 0.9 + gyro.z() * 0.1) * 0.01745);
+            }
+
             //myo角速度の配列への格納
-            myoGyrolist.add((float) ((System.nanoTime()-startTime)*0.000001));
-            myoGyrolist.add((float)gyro.x());
-            myoGyrolist.add((float)gyro.y());
-            myoGyrolist.add((float)gyro.z());
+            myoGyrolist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+            for (int i = 0; i < mg.length; i++) {
+                myoGyrolist.add(mg[i]);
+            }
 
             //myo角速度をテキストへセット
-            mxGyroTextView.setText(String.valueOf(gyro.x()));
-            myGyroTextView.setText(String.valueOf(gyro.y()));
-            mzGyroTextView.setText(String.valueOf(gyro.z()));
+            for (int i = 0; i < mg.length; i++) {
+                mGyroTextView[i].setText((String.valueOf(mg[i])));
+            }
         }
 
 
@@ -245,23 +290,23 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
         //mLockStateView = (TextView) findViewById(R.id.lock_state);
         mTextView = (TextView) findViewById(R.id.text);
 
-        state = (TextView)findViewById(R.id.state);
+        state = (TextView) findViewById(R.id.state);
 
-        mxAccelerometerTextView= (TextView) findViewById(R.id.mxAccelerometerValue);
-        myAccelerometerTextView= (TextView) findViewById(R.id.myAccelerometerValue);
-        mzAccelerometerTextView= (TextView) findViewById(R.id.mzAccelerometerValue);
+        mAccelerometerTextView[0] = (TextView) findViewById(R.id.mxAccelerometerValue);
+        mAccelerometerTextView[1] = (TextView) findViewById(R.id.myAccelerometerValue);
+        mAccelerometerTextView[2] = (TextView) findViewById(R.id.mzAccelerometerValue);
 
-        mxGyroTextView= (TextView) findViewById(R.id.mxGyroValue);
-        myGyroTextView= (TextView) findViewById(R.id.myGyroValue);
-        mzGyroTextView= (TextView) findViewById(R.id.mzGyroValue);
+        mGyroTextView[0] = (TextView) findViewById(R.id.mxGyroValue);
+        mGyroTextView[1] = (TextView) findViewById(R.id.myGyroValue);
+        mGyroTextView[2] = (TextView) findViewById(R.id.mzGyroValue);
 
-        axAccelerometerTextView= (TextView) findViewById(R.id.axAccelerometerValue);
-        ayAccelerometerTextView= (TextView) findViewById(R.id.ayAccelerometerValue);
-        azAccelerometerTextView= (TextView) findViewById(R.id.azAccelerometerValue);
+        aAccelerometerTextView[0] = (TextView) findViewById(R.id.axAccelerometerValue);
+        aAccelerometerTextView[1] = (TextView) findViewById(R.id.ayAccelerometerValue);
+        aAccelerometerTextView[2] = (TextView) findViewById(R.id.azAccelerometerValue);
 
-        axGyroTextView= (TextView) findViewById(R.id.axGyroValue);
-        ayGyroTextView= (TextView) findViewById(R.id.ayGyroValue);
-        azGyroTextView= (TextView) findViewById(R.id.azGyroValue);
+        aGyroTextView[0] = (TextView) findViewById(R.id.axGyroValue);
+        aGyroTextView[1] = (TextView) findViewById(R.id.ayGyroValue);
+        aGyroTextView[2] = (TextView) findViewById(R.id.azGyroValue);
 
         Button startbutton = (Button) findViewById(R.id.startbutton);
         Button stopbutton = (Button) findViewById(R.id.stopbutton);
@@ -269,8 +314,7 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
         stopbutton.setOnClickListener(this);
 
 
-
-        manager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        manager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelSensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         gyroSensor = manager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
@@ -329,33 +373,60 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
             if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
                 accelerometerValues = event.values.clone();
 
+                //ローパスフィルタをかける
+                for (int i = 0; i < accelerometerValues.length; i++) {
+                    lowpass_a[i] = lowpass_a[i] * 0.9f + accelerometerValues[i] * 0.1f;
+                }
+
+                //ハイパスフィルタをかけることで重力除去
+                for (int i = 0; i < a.length; i++) {
+                    a[i] = accelerometerValues[i] - lowpass_a[i];
+                }
+
+                for (int i = 0; i < a.length; i++) {
+                    a2[i] = a[i] * a[i];
+                }
+
+                A = (float) (Math.sqrt(a2[0] + a2[1] + a2[2])); //合成加速度
+
                 //Androidの加速度を配列に格納
-                androidAccellist.add((float)((System.nanoTime()-startTime)*0.000001));
-                androidAccellist.add(event.values[0]);
-                androidAccellist.add(event.values[1]);
-                androidAccellist.add(event.values[2]);
-            }
-            else if(event.sensor.getType() == Sensor.TYPE_GYROSCOPE){
+                androidAccellist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+                for (int i = 0; i < a.length; i++) {
+                    androidAccellist.add(a[i]);
+                }
+                androidAccellist.add(A);
+
+            } else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
                 gyroValues = event.values.clone();
 
-                //Androidの角速度を配列に格納
-                androidGyrolist.add((float) ((System.nanoTime()-startTime)*0.000001));
-                androidGyrolist.add(event.values[0]);
-                androidGyrolist.add(event.values[1]);
-                androidGyrolist.add(event.values[2]);
+                if (agFirst) {
+                    for (int i = 0; i < gyroValues.length; i++) {
+                        ag[i] = gyroValues[i];
+                    }
+                    agFirst = false;
+                } else {
+                    //ローパスフィルタをかける
+                    for (int i = 0; i < ag.length; i++) {
+                        ag[i] = ag[i] * 0.9f + gyroValues[i] * 0.1f;
+                    }
+                }
 
+                //Androidの角速度を配列に格納
+                androidGyrolist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+                for (int i = 0; i < ag.length; i++) {
+                    androidGyrolist.add(ag[i]);
+                }
             }
 
             //Androidの加速度をテキストにセット
-            axAccelerometerTextView.setText(String.valueOf(accelerometerValues[0]));
-            ayAccelerometerTextView.setText(String.valueOf(accelerometerValues[1]));
-            azAccelerometerTextView.setText(String.valueOf(accelerometerValues[2]));
+            for (int i = 0; i < aAccelerometerTextView.length; i++) {
+                aAccelerometerTextView[i].setText(String.valueOf(a[i]));
+            }
 
             //Androidの角速度をテキストにセット
-            axGyroTextView.setText(String.valueOf(gyroValues[0]));
-            ayGyroTextView.setText(String.valueOf(gyroValues[1]));
-            azGyroTextView.setText(String.valueOf(gyroValues[2]));
-
+            for (int i = 0; i < aGyroTextView.length; i++) {
+                aGyroTextView[i].setText(String.valueOf(ag[i]));
+            }
         }
 
     }
@@ -368,8 +439,8 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
     @Override
     protected void onResume() {
         super.onResume();
-        manager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_GAME);
-        manager.registerListener(this, gyroSensor, SensorManager.SENSOR_DELAY_GAME);
+        manager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_FASTEST);
+        manager.registerListener(this, gyroSensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     @Override
@@ -380,7 +451,7 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.startbutton:
                 state.setTextColor(Color.CYAN);
                 state.setText("計測中");
@@ -388,7 +459,7 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
                 androidGyrolist.clear();
                 myoAccellist.clear();
                 myoGyrolist.clear();
-                Toast.makeText(this,"計測を開始します",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "計測を開始します", Toast.LENGTH_SHORT).show();
                 startTime = System.nanoTime();
                 break;
             case R.id.stopbutton:
@@ -398,36 +469,36 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
                 intent.setClassName("com.example.yukinakajima.sheettest", "com.example.yukinakajima.sheettest.MainActivity");
 
                 float[] aa = new float[androidAccellist.size()];
-                for(int i=0; i<aa.length; i++){
+                for (int i = 0; i < aa.length; i++) {
                     aa[i] = androidAccellist.get(i);
                 }
 
                 float[] ag = new float[androidGyrolist.size()];
-                for(int i=0; i<ag.length; i++){
+                for (int i = 0; i < ag.length; i++) {
                     ag[i] = androidGyrolist.get(i);
                 }
 
                 float[] ma = new float[myoAccellist.size()];
-                for(int i=0; i<ma.length; i++){
+                for (int i = 0; i < ma.length; i++) {
                     ma[i] = myoAccellist.get(i);
                 }
 
                 float[] mg = new float[myoGyrolist.size()];
-                for(int i=0; i<mg.length; i++){
+                for (int i = 0; i < mg.length; i++) {
                     mg[i] = myoGyrolist.get(i);
                 }
 
-                intent.putExtra("androidaccel",aa);
-                intent.putExtra("androidgyro",ag);
-                intent.putExtra("myoaccel",ma);
-                intent.putExtra("myogyro",mg);
+                intent.putExtra("androidaccel", aa);
+                intent.putExtra("androidgyro", ag);
+                intent.putExtra("myoaccel", ma);
+                intent.putExtra("myogyro", mg);
 
-                try{
+                try {
                     startActivity(intent);
-                    Toast.makeText(this,"計測を終了します",Toast.LENGTH_SHORT).show();
-                }catch(Exception e){
-                    Toast.makeText(this,"対象のアプリがありません",Toast.LENGTH_SHORT).show();
-            }
+                    Toast.makeText(this, "計測を終了します", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "対象のアプリがありません", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
 
