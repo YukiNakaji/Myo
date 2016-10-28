@@ -16,6 +16,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +27,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.DataApi;
+import com.google.android.gms.wearable.DataEvent;
+import com.google.android.gms.wearable.DataEventBuffer;
+import com.google.android.gms.wearable.DataMap;
+import com.google.android.gms.wearable.Wearable;
 import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.Arm;
 import com.thalmic.myo.DeviceListener;
@@ -37,8 +47,9 @@ import com.thalmic.myo.scanner.ScanActivity;
 
 import java.util.ArrayList;
 
-public class HelloWorldActivity extends Activity implements SensorEventListener, View.OnClickListener {
+public class HelloWorldActivity extends Activity implements SensorEventListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, DataApi.DataListener {
     private long startTime = 0;
+    private GoogleApiClient mGoogleApiClient;
 
     private TextView state;
 
@@ -86,6 +97,21 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
     private boolean agFirst = true;
     private float[] ag = new float[3];
     ArrayList<Float> androidGyrolist = new ArrayList<Float>();
+
+    //Watchに関する変数
+    private float[] accel_time;
+    private float[] accel_x_values;
+    private float[] accel_y_values;
+    private float[] accel_z_values;
+    private float[] accel_3_values;
+
+    private float[] gyro_time;
+    private float[] gyro_x_values;
+    private float[] gyro_y_values;
+    private float[] gyro_z_values;
+
+    private float[] press_time;
+    private float[] press_values;
 
 
     // Classes that inherit from AbstractDeviceListener can be used to receive events from Myo devices.
@@ -308,12 +334,6 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
         aGyroTextView[1] = (TextView) findViewById(R.id.ayGyroValue);
         aGyroTextView[2] = (TextView) findViewById(R.id.azGyroValue);
 
-        Button startbutton = (Button) findViewById(R.id.startbutton);
-        Button stopbutton = (Button) findViewById(R.id.stopbutton);
-        startbutton.setOnClickListener(this);
-        stopbutton.setOnClickListener(this);
-
-
         manager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelSensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         gyroSensor = manager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
@@ -329,6 +349,13 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
 
         // Next, register for DeviceListener callbacks.
         hub.addListener(mListener);
+
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Wearable.API)
+                .build();
     }
 
     @Override
@@ -439,6 +466,7 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
     @Override
     protected void onResume() {
         super.onResume();
+        mGoogleApiClient.connect();
         manager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_FASTEST);
         manager.registerListener(this, gyroSensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
@@ -447,12 +475,14 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
     protected void onPause() {
         super.onPause();
         manager.unregisterListener(this);
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            Wearable.DataApi.removeListener(mGoogleApiClient, this);
+            mGoogleApiClient.disconnect();
+        }
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.startbutton:
+
+    public void start(View view) {
                 state.setTextColor(Color.CYAN);
                 state.setText("計測中");
                 androidAccellist.clear();
@@ -461,8 +491,33 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
                 myoGyrolist.clear();
                 Toast.makeText(this, "計測を開始します", Toast.LENGTH_SHORT).show();
                 startTime = System.nanoTime();
-                break;
-            case R.id.stopbutton:
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Log.d("TAG", "onConnected");
+        Wearable.DataApi.addListener(mGoogleApiClient, this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.d("TAG", "onConnectionSuspended");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.e("TAG", "onConnectionFailed: " + connectionResult);
+    }
+
+    @Override
+    public void onDataChanged(DataEventBuffer dataEvents) {
+        for (DataEvent event : dataEvents) {
+            if (event.getType() == DataEvent.TYPE_DELETED) {
+                Log.d("TAG", "DataItem deleted: " + event.getDataItem().getUri());
+            } else if (event.getType() == DataEvent.TYPE_CHANGED) {
+                Log.d("TAG", "DataItem changed: " + event.getDataItem().getUri());
+                DataMap dataMap = DataMap.fromByteArray(event.getDataItem().getData());
+               // ここでスプレッドシートにデータを送信するために
                 state.setTextColor(Color.WHITE);
                 state.setText("計測終了");
                 Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -493,14 +548,41 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
                 intent.putExtra("myoaccel", ma);
                 intent.putExtra("myogyro", mg);
 
+                accel_time = dataMap.getFloatArray("accel_t");
+                accel_x_values = dataMap.getFloatArray("accel_x");
+                accel_y_values = dataMap.getFloatArray("accel_y");
+                accel_z_values = dataMap.getFloatArray("accel_z");
+                accel_3_values = dataMap.getFloatArray("accel_3");
+
+                gyro_time = dataMap.getFloatArray("gyro_t");
+                gyro_x_values = dataMap.getFloatArray("gyro_x");
+                gyro_y_values = dataMap.getFloatArray("gyro_y");
+                gyro_z_values = dataMap.getFloatArray("gyro_z");
+
+                press_time = dataMap.getFloatArray("press_t");
+                press_values = dataMap.getFloatArray("press_v");
+
+                intent.putExtra("watch_accel_time", accel_time);
+                intent.putExtra("watch_accel_x", accel_x_values);
+                intent.putExtra("watch_accel_y", accel_y_values);
+                intent.putExtra("watch_accel_z", accel_z_values);
+                intent.putExtra("watch_accel_3", accel_3_values);
+
+                intent.putExtra("watch_gyro_time", gyro_time);
+                intent.putExtra("watch_gyro_x", gyro_x_values);
+                intent.putExtra("watch_gyro_y", gyro_y_values);
+                intent.putExtra("watch_gyro_z", gyro_z_values);
+
+                intent.putExtra("watch_press_time", press_time);
+                intent.putExtra("watch_press_value", press_values);
+
                 try {
                     startActivity(intent);
                     Toast.makeText(this, "計測を終了します", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Toast.makeText(this, "対象のアプリがありません", Toast.LENGTH_SHORT).show();
                 }
-                break;
+            }
         }
-
     }
 }

@@ -1,20 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <color name="common_google_signin_btn_text_dark_default">@android:color/white</color>
+    <color name="common_google_signin_btn_text_dark_disabled">#1F000000</color>
+    <color name="common_google_signin_btn_text_dark_focused">@android:color/black</color>
+    <color name="common_google_signin_btn_text_dark_pressed">@android:color/white</color>
+    <color name="common_google_signin_btn_text_light_default">#90000000</color>
+    <color name="common_google_signin_btn_text_light_disabled">#1F000000</color>
+    <color name="common_google_signin_btn_text_light_focused">#90000000</color>
+    <color name="common_google_signin_btn_text_light_pressed">#DE000000</color>
     <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/build/intermediates/exploded-aar/com.thalmic/myosdk/0.10.0/res/values/values.xml -->
     <eat-comment/>
     <color name="myosdk__button_orange">#FF8000</color>
     <color name="myosdk__button_red">#AE0922</color>
     <color name="myosdk__indicator_green">#24C75A</color>
     <color name="myosdk__thalmic_blue">#00BCDD</color>
+    <declare-styleable name="LoadingImageView"><attr format="enum" name="imageAspectRatioAdjust"><enum name="none" value="0"/><enum name="adjust_width" value="1"/><enum name="adjust_height" value="2"/></attr><attr format="float" name="imageAspectRatio"/><attr format="boolean" name="circleCrop"/></declare-styleable>
+    <declare-styleable name="SignInButton"><attr format="reference|enum" name="buttonSize"><enum name="standard" value="0"/><enum name="wide" value="1"/><enum name="icon_only" value="2"/></attr><attr format="reference|enum" name="colorScheme"><enum name="dark" value="0"/><enum name="light" value="1"/><enum name="auto" value="2"/></attr><attr format="reference|string" name="scopeUris"/></declare-styleable>
     <dimen name="myosdk__activity_horizontal_margin">16dp</dimen>
     <dimen name="myosdk__activity_vertical_margin">16dp</dimen>
     <dimen name="myosdk__fragment_scan_window_height">0dp</dimen>
     <dimen name="myosdk__fragment_scan_window_width">0dp</dimen>
+    <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <integer name="google_play_services_version">9683000</integer>
     <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">Myo and Android Data</string>
     <string name="arm_left">Left Arm</string>
     <string name="arm_right">Right Arm</string>
+    <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Enable</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t work unless you enable Google Play services.</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">Enable Google Play services</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Install</string>
+    <string msgid="2122112764540849864" name="common_google_play_services_install_text_phone"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are missing from your phone.</string>
+    <string msgid="7351599665250191022" name="common_google_play_services_install_text_tablet"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are missing from your tablet.</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">Get Google Play services</string>
+    <string name="common_google_play_services_notification_ticker">Google Play services error</string>
+    <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <string name="common_google_play_services_unknown_issue"><ns1:g id="app_name">%1$s</ns1:g> is having trouble with Google Play services. If the problem persists, please contact the developer for assistance.</string>
+    <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <string name="common_google_play_services_unsupported_text"><ns1:g id="app_name">%1$s</ns1:g> relies on Google Play services, which is not supported by your device. Contact the manufacturer for assistance.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play services</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">Update</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run unless you update Google Play services.</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">Update Google Play services</string>
+    <string name="common_google_play_services_updating_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are currently updating.</string>
+    <string name="common_google_play_services_updating_title">Google Play services are updating</string>
+    <string name="common_google_play_services_wear_update_text">New version of Google Play services needed. It will update itself shortly.</string>
+    <string name="common_open_on_phone">Open on phone</string>
+    <string name="common_signin_button_text">Sign in</string>
+    <string name="common_signin_button_text_long">Sign in with Google</string>
+    <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="hello_world">Hello world!</string>
     <string name="locked">Locked</string>
     <!-- From: file:/C:/Users/Yuki%20Nakajima/Desktop/myo-android-sdk-0.10.0/samples/HelloWorld/build/intermediates/exploded-aar/com.thalmic/myosdk/0.10.0/res/values/values.xml -->

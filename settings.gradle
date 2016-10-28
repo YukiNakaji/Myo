@@ -1,3 +1,3 @@
-include ':Background'
+include ':Background', ':wear'
 include ':HelloWorld'
 include ':MultipleMyos'

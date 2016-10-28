@@ -2,11 +2,123 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.6.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="614b2ffd04818e865e1c02cc149c6b92e518e862">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\classes-b1320b82cf04e9ee5f3d21bbf08e34baa8be4682.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.0.1\classes.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\pre-dexed\debug\classes-96f2f31071bcee2bf853b5553900ec997f21c5c8.jar" />
+    </item>
+    <item
         jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.thalmic\myosdk\0.10.0\classes.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="d189db75174a41996c33bb243d2228aacf10fa53">
         <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\classes-ccd9105ac13ec87ab8fb53009b72cf19c8e025b9.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\libs\internal_impl-24.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\internal_impl-24.0.0-f8c9c6ba287c7adaa40bb6c81ebbfe8a7712128f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\libs\internal_impl-24.0.0.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\pre-dexed\debug\internal_impl-24.0.0-47a7db02121e8b637832271ca08a9c569be22a03.jar" />
+    </item>
+    <item
+        jar="C:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.0.0\support-annotations-24.0.0.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\pre-dexed\debug\support-annotations-24.0.0-fe7480820c20c289a17422f6ee907fbcc1697ea1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.6.0\classes.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="f6afcfbf1989631424f9ceaae6ee24777d3cf6ba">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\pre-dexed\debug\classes-9379a85373a088efa25b5c5703f2113aab7aeab8.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.6.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="93a0248fe0524b4fa2d16f5f7c3cff8452796454">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\classes-9619a7bec0ce4e0e78e38b2aa04f14d5b4c84a3a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\9.6.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="a5da6fc5a6f39aee309ae6ae670e1b942759dc51">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\classes-879bf5b2267296fdd92eb830c57eee7c528057e6.jar" />
+    </item>
+    <item
+        jar="C:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.0.0\support-annotations-24.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\support-annotations-24.0.0-fe7480820c20c289a17422f6ee907fbcc1697ea1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.6.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="f6afcfbf1989631424f9ceaae6ee24777d3cf6ba">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\classes-7854d5004da47d0e62ab5a40d9efcc935f57d005.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.6.0\classes.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="93a0248fe0524b4fa2d16f5f7c3cff8452796454">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\pre-dexed\debug\classes-9e7f13745b1c4c12a6e6c81bf07bfd42d384e81d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\classes.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="2f7e6e2dad1bccaf68a8820820adc6c0d5b96d37">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\pre-dexed\debug\classes-a26cb30152bf886f4fe76161e125f73129f5dbf2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="2f7e6e2dad1bccaf68a8820820adc6c0d5b96d37">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\pre-dexed\debug\classes-03f68a33344dbd3b7791a2c9e9595f52608dbdb0.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\exploded-aar\com.google.android.support\wearable\2.0.0-alpha2\classes.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="87fb797ba434e0847cfcca4ffd740941c41634e6">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\pre-dexed\debug\classes-1ec258e556037ed8b65fe623c20016a974f3eee5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\9.6.0\classes.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="a5da6fc5a6f39aee309ae6ae670e1b942759dc51">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\pre-dexed\debug\classes-fb33e9f86ebf4bf9895d46829710eb9b93761e7a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.6.0\classes.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="614b2ffd04818e865e1c02cc149c6b92e518e862">
+        <dex dex="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\wear\build\intermediates\pre-dexed\debug\classes-d868da0319a2916f0abd3048dee80ab2a64aea96.jar" />
     </item>
     <item
         jar="C:\Users\Yuki Nakajima\Desktop\myo-android-sdk-0.10.0\samples\HelloWorld\build\intermediates\exploded-aar\com.thalmic\myosdk\0.10.0\libs\native-libs.jar"

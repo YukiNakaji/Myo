@@ -6,20 +6,6 @@
     tools:context="com.thalmic.android.sample.helloworld.HelloWorldActivity"
     tools:ignore="MergeRootFrame">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="START"
-        android:id="@+id/startbutton"
-        android:layout_gravity="center_horizontal|top" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="STOP/SEND"
-        android:id="@+id/stopbutton"
-        android:layout_gravity="right|top" />
-
     <GridLayout
         android:layout_width="294dp"
         android:layout_height="124dp"
@@ -207,5 +193,13 @@
         android:id="@+id/state"
         android:layout_gravity="left|top"
         android:textSize="50dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="START"
+        android:id="@+id/startbutton"
+        android:layout_gravity="right|top"
+        android:onClick="start" />
 
 </FrameLayout>

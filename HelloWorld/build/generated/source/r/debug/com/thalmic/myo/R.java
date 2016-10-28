@@ -8,28 +8,28 @@ package com.thalmic.myo;
 
 public final class R {
 	public static final class color {
-		public static final int myosdk__button_orange = 0x7f050000;
-		public static final int myosdk__button_red = 0x7f050001;
-		public static final int myosdk__indicator_green = 0x7f050002;
-		public static final int myosdk__thalmic_blue = 0x7f050003;
+		public static final int myosdk__button_orange = 0x7f050008;
+		public static final int myosdk__button_red = 0x7f050009;
+		public static final int myosdk__indicator_green = 0x7f05000a;
+		public static final int myosdk__thalmic_blue = 0x7f05000b;
 	}
 	public static final class dimen {
-		public static final int myosdk__activity_horizontal_margin = 0x7f060000;
-		public static final int myosdk__activity_vertical_margin = 0x7f060001;
-		public static final int myosdk__fragment_scan_window_height = 0x7f060002;
-		public static final int myosdk__fragment_scan_window_width = 0x7f060003;
+		public static final int myosdk__activity_horizontal_margin = 0x7f070000;
+		public static final int myosdk__activity_vertical_margin = 0x7f070001;
+		public static final int myosdk__fragment_scan_window_height = 0x7f070002;
+		public static final int myosdk__fragment_scan_window_width = 0x7f070003;
 	}
 	public static final class drawable {
-		public static final int myosdk__connected_dot = 0x7f020001;
-		public static final int myosdk__firmware_incompatible_dot = 0x7f020002;
+		public static final int myosdk__connected_dot = 0x7f020017;
+		public static final int myosdk__firmware_incompatible_dot = 0x7f020018;
 	}
 	public static final class id {
-		public static final int myosdk__action_scan = 0x7f0a0018;
-		public static final int myosdk__connection_state_dot = 0x7f0a0015;
-		public static final int myosdk__fragment_scan = 0x7f0a0012;
-		public static final int myosdk__progress = 0x7f0a0014;
-		public static final int myosdk__required_firmware_version_text = 0x7f0a0013;
-		public static final int myosdk__scan_result_view = 0x7f0a0016;
+		public static final int myosdk__action_scan = 0x7f060020;
+		public static final int myosdk__connection_state_dot = 0x7f06001d;
+		public static final int myosdk__fragment_scan = 0x7f06001a;
+		public static final int myosdk__progress = 0x7f06001c;
+		public static final int myosdk__required_firmware_version_text = 0x7f06001b;
+		public static final int myosdk__scan_result_view = 0x7f06001e;
 	}
 	public static final class layout {
 		public static final int myosdk__activity_scan = 0x7f040001;
@@ -37,18 +37,18 @@ public final class R {
 		public static final int myosdk__fragment_scan = 0x7f040003;
 	}
 	public static final class menu {
-		public static final int myosdk__fragment_scan = 0x7f090001;
+		public static final int myosdk__fragment_scan = 0x7f0b0001;
 	}
 	public static final class string {
-		public static final int myosdk__action_scan = 0x7f070005;
-		public static final int myosdk__action_stop_scan = 0x7f070006;
-		public static final int myosdk__firmware_required_format = 0x7f070007;
-		public static final int myosdk__firmware_version_format = 0x7f070008;
-		public static final int myosdk__title_activity_scan = 0x7f070009;
-		public static final int myosdk__unknown_myo = 0x7f07000a;
+		public static final int myosdk__action_scan = 0x7f090019;
+		public static final int myosdk__action_stop_scan = 0x7f09001a;
+		public static final int myosdk__firmware_required_format = 0x7f09001b;
+		public static final int myosdk__firmware_version_format = 0x7f09001c;
+		public static final int myosdk__title_activity_scan = 0x7f09001d;
+		public static final int myosdk__unknown_myo = 0x7f09001e;
 	}
 	public static final class style {
-		public static final int myosdk__PopupActivityTheme = 0x7f080000;
-		public static final int myosdk__ScanActivityTheme = 0x7f080001;
+		public static final int myosdk__PopupActivityTheme = 0x7f0a0000;
+		public static final int myosdk__ScanActivityTheme = 0x7f0a0001;
 	}
 }
