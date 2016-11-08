@@ -14,15 +14,7 @@
             <option value="$PROJECT_DIR$/wear" />
           </set>
         </option>
-        <option name="myModules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Background" />
-            <option value="$PROJECT_DIR$/HelloWorld" />
-            <option value="$PROJECT_DIR$/MultipleMyos" />
-            <option value="$PROJECT_DIR$/wear" />
-          </set>
-        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

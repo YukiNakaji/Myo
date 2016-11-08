@@ -47,7 +47,7 @@ import com.thalmic.myo.scanner.ScanActivity;
 
 import java.util.ArrayList;
 
-public class HelloWorldActivity extends Activity implements SensorEventListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, DataApi.DataListener {
+public class HelloWorldActivity extends Activity implements SensorEventListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, DataApi.DataListener {
     private long startTime = 0;
     private GoogleApiClient mGoogleApiClient;
 
@@ -58,7 +58,6 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
 
     //myo加速度に関する変数
     private TextView[] mAccelerometerTextView = new TextView[3];
-    private boolean mFirst = true;
     private float[] lowpass_m = new float[3];
     private float[] m = new float[3];
     private float[] m2 = new float[3];
@@ -68,8 +67,9 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
 
     //myo角速度に関する変数
     private TextView[] mGyroTextView = new TextView[3];
-    private boolean mgFirst = true;
     private float[] mg = new float[3];
+    private float[] mg2 = new float[3];
+    private float MG;
     ArrayList<Float> myoGyrolist = new ArrayList<Float>();
 
 
@@ -84,7 +84,6 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
 
     //Android加速度に関する変数
     private TextView[] aAccelerometerTextView = new TextView[3];
-    private boolean aFirst = true;
     private float[] lowpass_a = new float[3];
     private float[] a = new float[3];
     private float[] a2 = new float[3];
@@ -94,25 +93,15 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
 
     //Android角速度に関する変数
     private TextView[] aGyroTextView = new TextView[3];
-    private boolean agFirst = true;
     private float[] ag = new float[3];
+    private float[] ag2 = new float[3];
+    private float AG;
     ArrayList<Float> androidGyrolist = new ArrayList<Float>();
 
     //Watchに関する変数
-    private float[] accel_time;
-    private float[] accel_x_values;
-    private float[] accel_y_values;
-    private float[] accel_z_values;
-    private float[] accel_3_values;
-
-    private float[] gyro_time;
-    private float[] gyro_x_values;
-    private float[] gyro_y_values;
-    private float[] gyro_z_values;
-
-    private float[] press_time;
-    private float[] press_values;
-
+    private float[] watch_accel_values;
+    private float[] watch_gyro_values;
+    private float[] watch_press_values;
 
     // Classes that inherit from AbstractDeviceListener can be used to receive events from Myo devices.
     // If you do not override an event, the default behavior is to do nothing.
@@ -186,73 +175,61 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
         @Override
         public void onAccelerometerData(Myo myo, long timestamp, Vector3 accel) {
             super.onAccelerometerData(myo, timestamp, accel);
-            //Log.d(TAG, "onAccelerometerData: "+accel.x()+"\t"+accel.y()+"\t"+accel.z());
+            //生データの格納
+            myoAccellist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+            myoAccellist.add((float)accel.x());
+            myoAccellist.add((float)accel.y());
+            myoAccellist.add((float)accel.z());
 
-            if (mFirst) {
-                lowpass_m[0] = (float) accel.x();
-                lowpass_m[1] = (float) accel.y();
-                lowpass_m[2] = (float) accel.z();
+            //ローパスフィルタをかける
+            lowpass_m[0] = (float) (lowpass_m[0] * 0.9 + accel.x() * 0.1);
+            lowpass_m[1] = (float) (lowpass_m[1] * 0.9 + accel.y() * 0.1);
+            lowpass_m[2] = (float) (lowpass_m[2] * 0.9 + accel.z() * 0.1);
 
-                mFirst = false;
-            } else {
-                //ローパスフィルタをかける
-                lowpass_m[0] = (float) (lowpass_m[0] * 0.9 + accel.x() * 0.1);
-                lowpass_m[1] = (float) (lowpass_m[1] * 0.9 + accel.y() * 0.1);
-                lowpass_m[2] = (float) (lowpass_m[2] * 0.9 + accel.z() * 0.1);
-
-                //ハイパスフィルタで重力除去
-                m[0] = (float) accel.x() - lowpass_m[0];
-                m[1] = (float) accel.y() - lowpass_m[1];
-                m[2] = (float) accel.z() - lowpass_m[2];
-            }
+            //ハイパスフィルタで重力除去
+            m[0] = (float) accel.x() - lowpass_m[0];
+            m[1] = (float) accel.y() - lowpass_m[1];
+            m[2] = (float) accel.z() - lowpass_m[2];
 
             for (int i = 0; i < m.length; i++) {
                 m2[i] = m[i] * m[i];
             }
-
             M = (float) (Math.sqrt(m2[0] + m2[1] + m2[2]));
 
             //myo加速度の配列への格納
-            myoAccellist.add((float) ((System.nanoTime() - startTime) * 0.000001));
             for (int i = 0; i < m.length; i++) {
                 myoAccellist.add(m[i]);
-            }
-            myoAccellist.add(M);
-
-            //myo加速度をテキストへセット
-            for (int i = 0; i < m.length; i++) {
                 mAccelerometerTextView[i].setText(String.valueOf(m[i]));
             }
+            myoAccellist.add(M);
         }
 
         //myoジャイロセンサデータの取得
         @Override
         public void onGyroscopeData(Myo myo, long timestamp, Vector3 gyro) {
             super.onGyroscopeData(myo, timestamp, gyro);
+            //生データの格納
+            myoGyrolist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+            myoGyrolist.add((float)(gyro.x() * 0.01745));
+            myoGyrolist.add((float)(gyro.y() * 0.01745));
+            myoGyrolist.add((float)(gyro.z() * 0.01745));
 
-            if (mgFirst) {
-                mg[0] = (float) gyro.x();
-                mg[1] = (float) gyro.y();
-                mg[2] = (float) gyro.z();
+            //ローパスフィルタをかける
+            mg[0] = (float) ((mg[0] * 0.9 + gyro.x() * 0.1) * 0.01745);
+            mg[1] = (float) ((mg[1] * 0.9 + gyro.y() * 0.1) * 0.01745);
+            mg[2] = (float) ((mg[2] * 0.9 + gyro.z() * 0.1) * 0.01745);
 
-                mgFirst = false;
-            } else {
-                //ローパスフィルタをかける
-                mg[0] = (float) ((mg[0] * 0.9 + gyro.x() * 0.1) * 0.01745);
-                mg[1] = (float) ((mg[1] * 0.9 + gyro.y() * 0.1) * 0.01745);
-                mg[2] = (float) ((mg[2] * 0.9 + gyro.z() * 0.1) * 0.01745);
+            for (int i = 0; i < mg.length; i++) {
+                mg2[i] = mg[i] * mg[i];
             }
+            MG = (float) (Math.sqrt(mg2[0] + mg2[1] + mg2[2]));
 
             //myo角速度の配列への格納
-            myoGyrolist.add((float) ((System.nanoTime() - startTime) * 0.000001));
             for (int i = 0; i < mg.length; i++) {
                 myoGyrolist.add(mg[i]);
-            }
-
-            //myo角速度をテキストへセット
-            for (int i = 0; i < mg.length; i++) {
                 mGyroTextView[i].setText((String.valueOf(mg[i])));
             }
+            myoGyrolist.add(MG);
         }
 
 
@@ -398,7 +375,14 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
     public void onSensorChanged(SensorEvent event) {
         {
             if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+
                 accelerometerValues = event.values.clone();
+
+                //生データの格納
+                androidAccellist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+                for(int i=0; i<accelerometerValues.length; i++){
+                    androidAccellist.add(accelerometerValues[i]);
+                }
 
                 //ローパスフィルタをかける
                 for (int i = 0; i < accelerometerValues.length; i++) {
@@ -416,8 +400,7 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
 
                 A = (float) (Math.sqrt(a2[0] + a2[1] + a2[2])); //合成加速度
 
-                //Androidの加速度を配列に格納
-                androidAccellist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+                //フィルタをかけた後のAndroid加速度データの格納
                 for (int i = 0; i < a.length; i++) {
                     androidAccellist.add(a[i]);
                 }
@@ -426,37 +409,46 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
             } else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
                 gyroValues = event.values.clone();
 
-                if (agFirst) {
-                    for (int i = 0; i < gyroValues.length; i++) {
-                        ag[i] = gyroValues[i];
-                    }
-                    agFirst = false;
-                } else {
-                    //ローパスフィルタをかける
-                    for (int i = 0; i < ag.length; i++) {
-                        ag[i] = ag[i] * 0.9f + gyroValues[i] * 0.1f;
-                    }
+                //生データの格納
+                androidGyrolist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+                for(int i=0; i<gyroValues.length; i++){
+                    androidGyrolist.add(gyroValues[i]);
                 }
 
-                //Androidの角速度を配列に格納
-                androidGyrolist.add((float) ((System.nanoTime() - startTime) * 0.000001));
+                //ローパスフィルタをかける
+                for (int i = 0; i < ag.length; i++) {
+                    ag[i] = ag[i] * 0.9f + gyroValues[i] * 0.1f;
+                }
+
+                for (int i = 0; i < ag.length; i++) {
+                    ag2[i] = ag[i] * ag[i];
+                }
+
+                AG = (float) (Math.sqrt(ag2[0] + ag2[1] + ag2[2])); //合成角速度
+
+                // フィルタをかけた後のAndroidの角速度を格納
+
                 for (int i = 0; i < ag.length; i++) {
                     androidGyrolist.add(ag[i]);
                 }
+                androidGyrolist.add(AG);
+
             }
 
-            //Androidの加速度をテキストにセット
-            for (int i = 0; i < aAccelerometerTextView.length; i++) {
-                aAccelerometerTextView[i].setText(String.valueOf(a[i]));
-            }
 
-            //Androidの角速度をテキストにセット
-            for (int i = 0; i < aGyroTextView.length; i++) {
-                aGyroTextView[i].setText(String.valueOf(ag[i]));
-            }
         }
 
+        //Androidの加速度をテキストにセット
+        for (int i = 0; i < aAccelerometerTextView.length; i++) {
+            aAccelerometerTextView[i].setText(String.valueOf(a[i]));
+        }
+
+        //Androidの角速度をテキストにセット
+        for (int i = 0; i < aGyroTextView.length; i++) {
+            aGyroTextView[i].setText(String.valueOf(ag[i]));
+        }
     }
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
@@ -483,14 +475,14 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
 
 
     public void start(View view) {
-                state.setTextColor(Color.CYAN);
-                state.setText("計測中");
-                androidAccellist.clear();
-                androidGyrolist.clear();
-                myoAccellist.clear();
-                myoGyrolist.clear();
-                Toast.makeText(this, "計測を開始します", Toast.LENGTH_SHORT).show();
-                startTime = System.nanoTime();
+        state.setTextColor(Color.CYAN);
+        state.setText("計測中");
+        androidAccellist.clear();
+        androidGyrolist.clear();
+        myoAccellist.clear();
+        myoGyrolist.clear();
+        Toast.makeText(this, "計測を開始します", Toast.LENGTH_SHORT).show();
+        startTime = System.nanoTime();
     }
 
     @Override
@@ -517,7 +509,7 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
             } else if (event.getType() == DataEvent.TYPE_CHANGED) {
                 Log.d("TAG", "DataItem changed: " + event.getDataItem().getUri());
                 DataMap dataMap = DataMap.fromByteArray(event.getDataItem().getData());
-               // ここでスプレッドシートにデータを送信するために
+                // ここでスプレッドシートにデータを送信するために
                 state.setTextColor(Color.WHITE);
                 state.setText("計測終了");
                 Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -548,33 +540,15 @@ public class HelloWorldActivity extends Activity implements SensorEventListener,
                 intent.putExtra("myoaccel", ma);
                 intent.putExtra("myogyro", mg);
 
-                accel_time = dataMap.getFloatArray("accel_t");
-                accel_x_values = dataMap.getFloatArray("accel_x");
-                accel_y_values = dataMap.getFloatArray("accel_y");
-                accel_z_values = dataMap.getFloatArray("accel_z");
-                accel_3_values = dataMap.getFloatArray("accel_3");
+                //WATCHからとってきたデータを一度配列に入れ、Intentで送信
+                watch_accel_values = dataMap.getFloatArray("watch_accel");
+                watch_gyro_values = dataMap.getFloatArray("watch_gyro");
+                watch_press_values = dataMap.getFloatArray("watch_press");
 
-                gyro_time = dataMap.getFloatArray("gyro_t");
-                gyro_x_values = dataMap.getFloatArray("gyro_x");
-                gyro_y_values = dataMap.getFloatArray("gyro_y");
-                gyro_z_values = dataMap.getFloatArray("gyro_z");
+                intent.putExtra("watchaccel",watch_accel_values);
+                intent.putExtra("watchgyro", watch_gyro_values);
+                intent.putExtra("watchpress", watch_press_values);
 
-                press_time = dataMap.getFloatArray("press_t");
-                press_values = dataMap.getFloatArray("press_v");
-
-                intent.putExtra("watch_accel_time", accel_time);
-                intent.putExtra("watch_accel_x", accel_x_values);
-                intent.putExtra("watch_accel_y", accel_y_values);
-                intent.putExtra("watch_accel_z", accel_z_values);
-                intent.putExtra("watch_accel_3", accel_3_values);
-
-                intent.putExtra("watch_gyro_time", gyro_time);
-                intent.putExtra("watch_gyro_x", gyro_x_values);
-                intent.putExtra("watch_gyro_y", gyro_y_values);
-                intent.putExtra("watch_gyro_z", gyro_z_values);
-
-                intent.putExtra("watch_press_time", press_time);
-                intent.putExtra("watch_press_value", press_values);
 
                 try {
                     startActivity(intent);
